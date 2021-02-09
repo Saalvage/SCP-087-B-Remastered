@@ -93,7 +93,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     }
                 }
             }
-            //DController.UpdateFloors();
+            DController.UpdateFloors();
 
             float speed;
             GetInput(out speed);
