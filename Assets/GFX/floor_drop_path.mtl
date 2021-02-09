@@ -1,0 +1,11 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v5.0.0)
+
+newmtl concretefloor
+illum 1
+map_Kd concretefloor.jpeg
+
+newmtl brickwall
+illum 1
+map_Kd brickwall.jpeg
+
