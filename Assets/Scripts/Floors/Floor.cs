@@ -19,7 +19,6 @@ public class Floor : MonoBehaviour {
 
 	public GameObject actualFloor;
 	public MeshRenderer meshRenderer;
-	public NavMeshSurface navSurface;
 
     #region ACTS
     public const int ACT_NONE = 0;

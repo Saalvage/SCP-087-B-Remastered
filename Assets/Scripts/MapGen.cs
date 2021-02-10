@@ -231,9 +231,9 @@ public class MapGen : MonoBehaviour
                                 tempGameobject = Instantiate(floorDefault);
                             }
                             break;
-                        /*case 11:
+                        case 11:
                             tempGameobject = Instantiate(floorNew);
-                            break;*/
+                            break;
                         case 12:
                             if (k > 50)
                             {
@@ -275,7 +275,6 @@ public class MapGen : MonoBehaviour
             tempGameobject.transform.parent = Floor.floors[k].transform;
             Floor.floors[k].actualFloor = tempGameobject;
             Floor.floors[k].meshRenderer = tempGameobject.GetComponentInChildren<MeshRenderer>();
-            Floor.floors[k].navSurface = tempGameobject.GetComponentInChildren<NavMeshSurface>();
             if (k % 2 == 0)
             {
                 Floor.floors[k].transform.position = new Vector3(0, (-k * 3.0f), 0);
@@ -301,17 +300,6 @@ public class MapGen : MonoBehaviour
         DController.UpdateFloors();
 
         if (generateMarkers == true) CreateMarkers();
-        CreateNavigation();
-    }
-
-    public void CreateNavigation()
-    {
-        Debug.LogFormat("Generating navmesh for {0} floors...", floorAmount);
-        foreach(Floor floor in Floor.floors)
-        {
-            floor.navSurface.BuildNavMesh();
-        }
-        Debug.Log("Generated navmesh successfully.");
     }
 
     public void CreateMarkers()
