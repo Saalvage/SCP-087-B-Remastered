@@ -78,18 +78,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 prevFloor = Globals.playerFloor;
                 if (Globals.playerFloor + 1 < Floor.floors.Length)
                 {
-                    Floor.floors[Globals.playerFloor + 1].mRend.enabled = true;
+                    Floor.floors[Globals.playerFloor + 1].meshRenderer.enabled = true;
                     if (Globals.playerFloor + 2 < Floor.floors.Length)
                     {
-                        Floor.floors[Globals.playerFloor + 2].mRend.enabled = false;
+                        Floor.floors[Globals.playerFloor + 2].meshRenderer.enabled = false;
                     }
                 }
                 if (Globals.playerFloor >= 1)
                 {
-                    Floor.floors[Globals.playerFloor - 1].mRend.enabled = true;
+                    Floor.floors[Globals.playerFloor - 1].meshRenderer.enabled = true;
                     if (Globals.playerFloor >= 2)
                     {
-                        Floor.floors[Globals.playerFloor - 2].mRend.enabled = false;
+                        Floor.floors[Globals.playerFloor - 2].meshRenderer.enabled = false;
                     }
                 }
             }

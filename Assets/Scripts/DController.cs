@@ -1,13 +1,15 @@
 ﻿using Discord;
 using System;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DController : MonoBehaviour
 {
 	public static Discord.Discord discord;
 	public static ActivityManager activityManager;
 
-	void Start()
+	void Awake()
 	{
 		discord = new Discord.Discord(677993610330898433,
 			(UInt64)CreateFlags.NoRequireDiscord);
@@ -34,10 +36,10 @@ public class DController : MonoBehaviour
 	{
 		activityManager.UpdateActivity(activity, (result) =>
 		{
-			if (result == Discord.Result.Ok)
+			if (result == Result.Ok)
 			{
 				activity.State = "Floor: " + Globals.playerFloor;
-			}
+            }
 			else
 			{
 				Debug.LogError("Failed to update presence.");

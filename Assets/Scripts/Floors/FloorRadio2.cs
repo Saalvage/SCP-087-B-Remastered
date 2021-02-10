@@ -19,7 +19,7 @@ public class FloorRadio2 : Floor
 
             if (Timer >= 3.5f)
             {
-                Globals.radioSrc.PlayOneShot(Globals.M_GEN.radioClips[1]);
+                Globals.radioSrc.PlayOneShot(Globals.mapGen.radioClips[1]);
                 Timer = -1.0f;
             }
         }

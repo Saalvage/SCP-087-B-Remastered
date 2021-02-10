@@ -3,7 +3,7 @@
 public class Globals
 {
 	public static Dreamfilter dFilter;
-	public static MapGen M_GEN;
+	public static MapGen mapGen;
 
 	public static AudioSource matchSrc;
 	public static AudioSource radioSrc;
@@ -28,7 +28,7 @@ public class GlobalsInitializer : MonoBehaviour
 {
 	[Header("Classes")]
 	public Dreamfilter dFilter;
-	public MapGen M_GEN;
+	public MapGen mapGen;
 
 	[Header("Audio Sources")]
 	public AudioSource matchSrc;
@@ -55,7 +55,7 @@ public class GlobalsInitializer : MonoBehaviour
 	private void Awake()
     {
 		Globals.dFilter = dFilter;
-		Globals.M_GEN = M_GEN;
+		Globals.mapGen = mapGen;
 
 		Globals.matchSrc = matchSrc;
 		Globals.radioSrc = radioSrc;
@@ -75,4 +75,15 @@ public class GlobalsInitializer : MonoBehaviour
 		Globals.isMatchOff = isMatchOff;
 		Globals.playerFloor = playerFloor;
     }
+
+    private void FixedUpdate()
+    {
+        matchLight = Globals.matchLight;
+        mapParent = Globals.mapParent;
+        enemyPrefab = Globals.enemyPrefab;
+        playerObject = Globals.playerObject;
+
+        isMatchOff = Globals.isMatchOff;
+        playerFloor = Globals.playerFloor;
+	}
 }

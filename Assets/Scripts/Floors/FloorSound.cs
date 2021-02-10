@@ -22,13 +22,13 @@ public class FloorSound : Floor
 	{
 		if (Timer == 1)
 		{
-			AudioClip = Globals.M_GEN.loudBreath;
+			AudioClip = Globals.mapGen.loudBreath;
 			OverflowValue = 22;
 			MinTimeOut = 10;
 		}
 		else
 		{
-			AudioClip = Globals.M_GEN.loudStep;
+			AudioClip = Globals.mapGen.loudStep;
 			OverflowValue = 3;
 			MinTimeOut = 1;
 		}

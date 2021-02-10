@@ -17,7 +17,7 @@ public class Floor : MonoBehaviour {
 	public static Random mapGenRandom;
 
 	public GameObject actualFloor;
-	public MeshRenderer mRend;
+	public MeshRenderer meshRenderer;
 
     #region ACTS
     public const int ACT_NONE = 0;
@@ -60,13 +60,13 @@ public class Floor : MonoBehaviour {
 				throw new UnityException("Could not set floor action!");
 			}
 		}
-		floors[i] = Instantiate(Globals.M_GEN.FLOOR_PREFAB, Globals.mapParent.transform).AddComponent<T>();
+		floors[i] = Instantiate(Globals.mapGen.FLOOR_PREFAB, Globals.mapParent.transform).AddComponent<T>();
 	}
 
-	public static void CreateFloor<T>(int i, int Timer) where T : Floor
+	public static void CreateFloor<T>(int i, int timer) where T : Floor
 	{
 		CreateFloor<T>(i);
-		floors[i].Timer = Timer;
+		floors[i].Timer = timer;
 	}
 
 }

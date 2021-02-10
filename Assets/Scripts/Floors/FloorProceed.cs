@@ -19,7 +19,7 @@ public class FloorProceed : Floor
 
 			if(Timer >= 1.5f)
             {
-				Globals.radioSrc.PlayOneShot(Globals.M_GEN.radioClips[0]);
+				Globals.radioSrc.PlayOneShot(Globals.mapGen.radioClips[0]);
 				Timer = -1.0f;
             }
         }
