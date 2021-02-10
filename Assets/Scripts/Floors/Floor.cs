@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 using Random = System.Random;
 
 public class Floor : MonoBehaviour {
@@ -18,6 +19,7 @@ public class Floor : MonoBehaviour {
 
 	public GameObject actualFloor;
 	public MeshRenderer meshRenderer;
+	public NavMeshSurface navSurface;
 
     #region ACTS
     public const int ACT_NONE = 0;
@@ -60,7 +62,7 @@ public class Floor : MonoBehaviour {
 				throw new UnityException("Could not set floor action!");
 			}
 		}
-		floors[i] = Instantiate(Globals.mapGen.FLOOR_PREFAB, Globals.mapParent.transform).AddComponent<T>();
+		floors[i] = Instantiate(Globals.mapGen.floorPrefab, Globals.mapParent.transform).AddComponent<T>();
 	}
 
 	public static void CreateFloor<T>(int i, int timer) where T : Floor

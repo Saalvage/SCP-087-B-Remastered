@@ -106,7 +106,7 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
+    agentRadius: 0.3
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
@@ -114,7 +114,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.1
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -4286,8 +4286,12 @@ MonoBehaviour:
   enemyPrefab: {fileID: 6343496437571968687, guid: d360d455e9b967746871908201a0b610,
     type: 3}
   playerObject: {fileID: 8242448353044138783}
+  mentalMaterial: {fileID: 0}
+  redmistMaterial: {fileID: 0}
+  eyekillerMaterial: {fileID: 0}
   isMatchOff: 0
   playerFloor: 0
+  mapSeed: 0
 --- !u!4 &1116850170
 Transform:
   m_ObjectHideFlags: 0
@@ -6508,34 +6512,33 @@ MonoBehaviour:
   generateMarkers: 1
   generateGlimpses: 1
   floorAmount: 270
-  seed: 2147483647
-  FLOOR_PREFAB: {fileID: 1345816261531964910, guid: f3433e761e7fd88468269151b35a69da,
+  floorPrefab: {fileID: 1345816261531964910, guid: f3433e761e7fd88468269151b35a69da,
     type: 3}
-  floor_default: {fileID: 923611053515229292, guid: 073d67ecb5504c64b85ee999ea0828bc,
+  floorDefault: {fileID: 923611053515229292, guid: 073d67ecb5504c64b85ee999ea0828bc,
     type: 3}
-  floor_start: {fileID: 5041094273381853663, guid: f867960da3e11c94ab40b05b2748e54f,
+  floorStart: {fileID: 5041094273381853663, guid: f867960da3e11c94ab40b05b2748e54f,
     type: 3}
-  floor_window: {fileID: 7193123194115835900, guid: f5a1aef6374b56c43af65ac5126156f1,
+  floorWindow: {fileID: 7193123194115835900, guid: f5a1aef6374b56c43af65ac5126156f1,
     type: 3}
-  floor_smallhall: {fileID: 5554676830390878643, guid: 3d883df2735901047bac853f4a3b2435,
+  floorSmallHall: {fileID: 5554676830390878643, guid: 3d883df2735901047bac853f4a3b2435,
     type: 3}
-  floor_bighall: {fileID: 240880355378860206, guid: e340a37a79694e440a5ecb4bbddb2d05,
+  floorBigHall: {fileID: 240880355378860206, guid: e340a37a79694e440a5ecb4bbddb2d05,
     type: 3}
-  floor_hole: {fileID: 3135509592553388847, guid: 74ad25691290e26448dddd2a6f44824d,
+  floorHole: {fileID: 3135509592553388847, guid: 74ad25691290e26448dddd2a6f44824d,
     type: 3}
-  floor_holealt: {fileID: 6936215997584992653, guid: 9e10c518621e88d4989062967c14d43c,
+  floorHoleAlt: {fileID: 6936215997584992653, guid: 9e10c518621e88d4989062967c14d43c,
     type: 3}
-  floor_choice: {fileID: 6569074501197311635, guid: 1058fe245d3c6a4488a393a8b7d38b32,
+  floorChoice: {fileID: 6569074501197311635, guid: 1058fe245d3c6a4488a393a8b7d38b32,
     type: 3}
-  floor_maze: {fileID: 2465136394121648814, guid: cbeb894799ea07240b0a4ae5baae9934,
+  floorMaze: {fileID: 2465136394121648814, guid: cbeb894799ea07240b0a4ae5baae9934,
     type: 3}
-  floor_new1: {fileID: 6251613930230384702, guid: 858f85f7035980c4f8ff14f7196fd9c0,
+  floorNew: {fileID: 0}
+  floorDrop: {fileID: 3314121361175075469, guid: 8109f371e370f9649ab2d670a9cd2bce,
     type: 3}
-  floor_drop: {fileID: 3314121361175075469, guid: 8109f371e370f9649ab2d670a9cd2bce,
+  floorDropPath: {fileID: 7967681645662561063, guid: 1818d6e7611fd3c4eb50dde8896cacdd,
     type: 3}
-  floor_drop_path: {fileID: 7967681645662561063, guid: 1818d6e7611fd3c4eb50dde8896cacdd,
+  floorMarker: {fileID: 116739024830097873, guid: 4e5822901e8d9284b8c0d7e5c2819107,
     type: 3}
-  fMarker: {fileID: 116739024830097873, guid: 4e5822901e8d9284b8c0d7e5c2819107, type: 3}
   loudStep: {fileID: 8300000, guid: 19c97d87cc5ce8549a6b0ab09275d72a, type: 3}
   loudBreath: {fileID: 8300000, guid: e927a220bcca96340848ded5f153ee9b, type: 3}
   radioClips:
@@ -6569,12 +6572,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862bf489651679f42b076ad06a051f63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glimp: {fileID: 7608013545169347719, guid: ae7ee53e3356e2a41a1aaffa765f1e23, type: 3}
-  mgen: {fileID: 1816410167}
+  glimpsePrefab: {fileID: 7608013545169347719, guid: ae7ee53e3356e2a41a1aaffa765f1e23,
+    type: 3}
+  mapGen: {fileID: 1816410167}
   glimpseMats:
   - {fileID: 2100000, guid: ae72c7610c8964d47b3a1cc4a94515c5, type: 2}
   - {fileID: 2100000, guid: f76fa2ef90e16df42a5a4a8945f4ea77, type: 2}
-  maincam: {fileID: 8242448353043679551}
+  mainCam: {fileID: 8242448353043679551}
   glimpses: []
   noClip: {fileID: 8300000, guid: 7a50618b7bacb8847873d8d08b32aaf0, type: 3}
 --- !u!114 &1816410170

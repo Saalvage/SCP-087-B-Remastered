@@ -3,18 +3,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-	public enum STATE
-	{
-		IDLE,
-		WALK,
-	}
+	public Spawner.STATE enemyState = Spawner.STATE.IDLE;
+	public Spawner.ENEMYTYPE enemyType = Spawner.ENEMYTYPE.MENTAL;
 
-	public static void CreateEnemy(Vector3 pos, bool idle)
-	{
-		GameObject go = Instantiate(Globals.enemyPrefab, pos, Quaternion.identity);
-		Animator a = go.GetComponent<Animator>();
-		a.SetTrigger(idle ? "Idle" : "Walk");
-		go.AddComponent<Enemy>();
-	}
-
+	public Animator enemyAnimator;
+	public SkinnedMeshRenderer enemyRenderer;
 }

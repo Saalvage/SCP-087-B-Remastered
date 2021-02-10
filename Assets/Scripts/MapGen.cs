@@ -1,36 +1,35 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using Random = System.Random;
 
 public class MapGen : MonoBehaviour
 {
-    [Header("Floor Events")]
-    [SerializeField] private Spawner monsterSpawner = null;
+    public Spawner monsterSpawner = null;
     private Random rand;
 
     [Header("Generation Settings")]
     public bool generateMarkers = false;
     public bool generateGlimpses = true;
     public int floorAmount;
-    public int seed;
 
     #region mapFiles
     [Header("Map Files")]
-    public GameObject FLOOR_PREFAB;
-    public GameObject floor_default;
-    public GameObject floor_start;
-    public GameObject floor_window;
-    public GameObject floor_smallhall;
-    public GameObject floor_bighall;
-    public GameObject floor_hole;
-    public GameObject floor_holealt;
-    public GameObject floor_choice;
-    public GameObject floor_maze;
-    public GameObject floor_new1;
-    public GameObject floor_drop;
-    public GameObject floor_drop_path;
-    public GameObject fMarker;
+    public GameObject floorPrefab;
+    public GameObject floorDefault;
+    public GameObject floorStart;
+    public GameObject floorWindow;
+    public GameObject floorSmallHall;
+    public GameObject floorBigHall;
+    public GameObject floorHole;
+    public GameObject floorHoleAlt;
+    public GameObject floorChoice;
+    public GameObject floorMaze;
+    public GameObject floorNew;
+    public GameObject floorDrop;
+    public GameObject floorDropPath;
+    public GameObject floorMarker;
     #endregion
 
     [Header("Audio")]
@@ -42,7 +41,6 @@ public class MapGen : MonoBehaviour
     {
         Globals.mapGen = this;
         CreateMap();
-        Enemy.CreateEnemy(new Vector3(1, -3f, 1), false);
         if (generateGlimpses) monsterSpawner.CreateGlimpses();
     }
 
@@ -53,15 +51,15 @@ public class MapGen : MonoBehaviour
             throw new UnityException("Map cannot have 0 floors.");
         }
 
-        Debug.Log(string.Format("Creating map with {0} floors, seed {1}.", floorAmount, seed));
+        Debug.Log(string.Format("Creating map with {0} floors, seed {1}.", floorAmount, Globals.mapSeed));
         Floor.floors = new Floor[floorAmount];
 
-        rand = new Random(seed);
+        rand = new Random(Globals.mapSeed);
         Floor.mapGenRandom = rand;
 
         Floor.CreateFloor<FloorProceed>(0);
 
-        Floor.CreateFloor<Floor>(1);
+        Floor.CreateFloor<Floor173>(1);
 
         Floor.CreateFloor<FloorRadio2>(rand.Next(3, 5));
 
@@ -193,7 +191,7 @@ public class MapGen : MonoBehaviour
         {
             if (k == 0)
             {
-                tempGameobject = Instantiate(floor_start) as GameObject;
+                tempGameobject = Instantiate(floorStart) as GameObject;
             }
             else
             {
@@ -204,50 +202,50 @@ public class MapGen : MonoBehaviour
                     {
                         case 1:
                         case 2:
-                            tempGameobject = Instantiate(floor_window);
+                            tempGameobject = Instantiate(floorWindow);
                             break;
                         case 3:
                         case 4:
-                            tempGameobject = Instantiate(floor_smallhall);
+                            tempGameobject = Instantiate(floorSmallHall);
                             break;
                         case 5:
                         case 6:
-                            tempGameobject = Instantiate(floor_bighall);
+                            tempGameobject = Instantiate(floorBigHall);
                             break;
                         case 7:
-                            tempGameobject = Instantiate(floor_hole);
+                            tempGameobject = Instantiate(floorHole);
                             break;
                         case 8:
-                            tempGameobject = Instantiate(floor_holealt);
+                            tempGameobject = Instantiate(floorHoleAlt);
                             break;
                         case 9:
-                            tempGameobject = Instantiate(floor_choice);
+                            tempGameobject = Instantiate(floorChoice);
                             break;
                         case 10:
                             if (k > 40)
                             {
-                                tempGameobject = Instantiate(floor_maze);
+                                tempGameobject = Instantiate(floorMaze);
                             }
                             else
                             {
-                                tempGameobject = Instantiate(floor_default);
+                                tempGameobject = Instantiate(floorDefault);
                             }
                             break;
-                        case 11:
-                            tempGameobject = Instantiate(floor_new1);
-                            break;
+                        /*case 11:
+                            tempGameobject = Instantiate(floorNew);
+                            break;*/
                         case 12:
                             if (k > 50)
                             {
-                                tempGameobject = Instantiate(floor_drop_path);
+                                tempGameobject = Instantiate(floorDropPath);
                             }
                             else
                             {
-                                tempGameobject = Instantiate(floor_drop);
+                                tempGameobject = Instantiate(floorDrop);
                             }
                             break;
                         default:
-                            tempGameobject = Instantiate(floor_default);
+                            tempGameobject = Instantiate(floorDefault);
                             break;
                     }
                 }
@@ -256,19 +254,19 @@ public class MapGen : MonoBehaviour
                     switch (Floor.floors[k].ID)
                     {
                         case Floor.ACT_173:
-                            tempGameobject = Instantiate(floor_smallhall) as GameObject;
+                            tempGameobject = Instantiate(floorSmallHall) as GameObject;
                             break;
                         case Floor.ACT_CELL:
-                            tempGameobject = Instantiate(floor_window) as GameObject;
+                            tempGameobject = Instantiate(floorWindow) as GameObject;
                             break;
                         case Floor.ACT_TRICK1:
-                            tempGameobject = Instantiate(floor_hole) as GameObject;
+                            tempGameobject = Instantiate(floorHole) as GameObject;
                             break;
                         case Floor.ACT_TRICK2:
-                            tempGameobject = Instantiate(floor_holealt) as GameObject;
+                            tempGameobject = Instantiate(floorHoleAlt) as GameObject;
                             break;
                         default:
-                            tempGameobject = Instantiate(floor_default) as GameObject;
+                            tempGameobject = Instantiate(floorDefault) as GameObject;
                             break;
                     }
                 }
@@ -277,6 +275,7 @@ public class MapGen : MonoBehaviour
             tempGameobject.transform.parent = Floor.floors[k].transform;
             Floor.floors[k].actualFloor = tempGameobject;
             Floor.floors[k].meshRenderer = tempGameobject.GetComponentInChildren<MeshRenderer>();
+            Floor.floors[k].navSurface = tempGameobject.GetComponentInChildren<NavMeshSurface>();
             if (k % 2 == 0)
             {
                 Floor.floors[k].transform.position = new Vector3(0, (-k * 3.0f), 0);
@@ -302,6 +301,17 @@ public class MapGen : MonoBehaviour
         DController.UpdateFloors();
 
         if (generateMarkers == true) CreateMarkers();
+        CreateNavigation();
+    }
+
+    public void CreateNavigation()
+    {
+        Debug.LogFormat("Generating navmesh for {0} floors...", floorAmount);
+        foreach(Floor floor in Floor.floors)
+        {
+            floor.navSurface.BuildNavMesh();
+        }
+        Debug.Log("Generated navmesh successfully.");
     }
 
     public void CreateMarkers()
@@ -355,11 +365,11 @@ public class MapGen : MonoBehaviour
                 number = string.Empty;
                 for (int n = 1; n < rand.Next(1, 5); n++)
                 {
-                    number = (number + (char)(rand.Next(33, 123 + 1) % 255));
+                    number += (char)(rand.Next(33, 123 + 1) % 255);
                 }
             }
 
-            GameObject floorMarker = Instantiate(fMarker) as GameObject;
+            GameObject floorMarker = Instantiate(this.floorMarker) as GameObject;
             floorMarker.transform.parent = Floor.floors[q].transform;
             floorMarker.transform.position = new Vector3(0.7f, 0.3f, -0.51f);
 

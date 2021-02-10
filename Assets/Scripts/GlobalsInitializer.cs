@@ -20,8 +20,13 @@ public class Globals
 	public static GameObject enemyPrefab;
 	public static GameObject playerObject;
 
+	public static Material mentalMaterial;
+	public static Material redmistMaterial;
+	public static Material eyekillerMaterial;
+
 	public static bool isMatchOff = false;
 	public static int playerFloor = 0;
+	public static int mapSeed;
 }
 
 public class GlobalsInitializer : MonoBehaviour
@@ -48,9 +53,15 @@ public class GlobalsInitializer : MonoBehaviour
 	public GameObject enemyPrefab;
 	public GameObject playerObject;
 
+	[Header("Materials")]
+	public Material mentalMaterial;
+	public Material redmistMaterial;
+	public Material eyekillerMaterial;
+
 	[Header("Data")]
 	public bool isMatchOff = false;
 	public int playerFloor = 0;
+	public int mapSeed;
 
 	private void Awake()
     {
@@ -72,8 +83,13 @@ public class GlobalsInitializer : MonoBehaviour
 		Globals.enemyPrefab = enemyPrefab;
 		Globals.playerObject = playerObject;
 
+		Globals.mentalMaterial = this.mentalMaterial;
+		Globals.redmistMaterial = this.redmistMaterial;
+		Globals.eyekillerMaterial = this.eyekillerMaterial;
+
 		Globals.isMatchOff = isMatchOff;
 		Globals.playerFloor = playerFloor;
+		Globals.mapSeed = mapSeed;
     }
 
     private void FixedUpdate()
@@ -85,5 +101,6 @@ public class GlobalsInitializer : MonoBehaviour
 
         isMatchOff = Globals.isMatchOff;
         playerFloor = Globals.playerFloor;
+		mapSeed = Globals.mapSeed;
 	}
 }
