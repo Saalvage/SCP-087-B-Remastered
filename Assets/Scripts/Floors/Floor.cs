@@ -48,7 +48,7 @@ public class Floor : MonoBehaviour {
 	{
 		if (floors[i] != null)
 		{
-			int dir = mapGenRandom.Next(0, 1) * -2 + 1; // -1 or 1
+			int dir = mapGenRandom.NextDouble() >= 0.5 ? -1 : 1;
 			int inc = 1;
 			while (i > 0 && i < floors.Length && floors[i] != null)
 			{

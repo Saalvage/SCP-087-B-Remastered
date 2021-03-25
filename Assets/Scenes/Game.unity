@@ -6532,7 +6532,8 @@ MonoBehaviour:
     type: 3}
   floorMaze: {fileID: 2465136394121648814, guid: cbeb894799ea07240b0a4ae5baae9934,
     type: 3}
-  floorNew: {fileID: 0}
+  floorNew: {fileID: 6251613930230384702, guid: 858f85f7035980c4f8ff14f7196fd9c0,
+    type: 3}
   floorDrop: {fileID: 3314121361175075469, guid: 8109f371e370f9649ab2d670a9cd2bce,
     type: 3}
   floorDropPath: {fileID: 7967681645662561063, guid: 1818d6e7611fd3c4eb50dde8896cacdd,
